@@ -4,6 +4,39 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello World! This is the Exercise2 Project.");
+        Console.Write("What is your grade percentage? ");
+        int percent = int.Parse(Console.ReadLine());
+
+        string letter = "";
+
+        if (percent >= 90)
+        {
+            letter = "A";
+        }
+        else if (percent >= 80)
+        {
+            letter = "B";
+        }
+        else if (percent >= 7)
+        {
+            letter = "C";
+        }
+        else if (percent >= 60)
+        {
+            letter = "D";
+        }
+        else
+        {
+            letter = "F";
+        }
+        Console.WriteLine("Your grade is: " + letter);
+        if (percent >= 70)
+        {
+            Console.WriteLine("You passed the class!");
+        }
+        else
+        {
+            Console.WriteLine("You didn't pass the class, try again!");
+        }
     }
 }
