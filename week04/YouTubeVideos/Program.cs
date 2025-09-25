@@ -47,19 +47,7 @@ class Program
             {
                 Console.WriteLine($" - {comment.CommenterName} {comment.text}");
             }
-                Console.WriteLin3
-
-
-
-
-
-
-
-
-
-
-                e("\n");
-        
+            Console.WriteLine("\n");
         }
     }
 
