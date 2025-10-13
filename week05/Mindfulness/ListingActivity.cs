@@ -45,7 +45,7 @@ public class ListingActivity : Activity
         // While there is still time, user enters the prompts
         while (DateTime.Now < endTime)
         {
-            // Mostrar "Next item:" y esperar entrada
+            // Waits for the next item
             Console.Write("Next item: ");
             string input = Console.ReadLine();
 
@@ -64,7 +64,7 @@ public class ListingActivity : Activity
             }
         }
 
-        // Mostrar resultados
+        // Shows the result
         Console.WriteLine($"\nYou listed {items.Count} item(s):");
         foreach (string item in items)
         {
