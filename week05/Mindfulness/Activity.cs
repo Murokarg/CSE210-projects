@@ -60,12 +60,12 @@ public class Activity
     public void DisplayStartingMessage()
     {
         Console.Clear();
-        Console.WriteLine("--- {GetName()} ---");
+        Console.WriteLine($"--- {GetName()} ---");
         Console.WriteLine(GetDescription());
         Console.WriteLine();
     }
 
-    // Show final message 
+    // Show final message
 
     public void DisplayEndingMessage()
     {
@@ -74,9 +74,20 @@ public class Activity
         Console.WriteLine($"Duration: {GetDuration} seconds");
     }
 
+    // Shows spinner during n amount of seconds 
     public void ShowSpinner(int seconds)
     {
+        DateTime endTime = DateTime.Now.AddSeconds(seconds);
+        int spinIndex = 0;
+        char[] spinner = { '|', '/', '-', '\\' };
 
+        while (DateTime.Now < endTime)
+        {
+            Console.Write($"\r{spinner[spinIndex]}");
+            spinIndex = (spinIndex + 1) % spinner.Length;
+            Thread.Sleep(150);
+        }
+        Console.WriteLine();
     }
 
     // Shows the countdown
@@ -98,36 +109,34 @@ public class Activity
         // Asks for duration
         Console.WriteLine("How long, in seconds, would you like for your session? ");
         string input = Console.ReadLine();
-        while (!int.TryParse(input, out int duration) || duration <= 0)
+        int duration;
+
+        while (!int.TryParse(input, out duration) || duration <= 0)
         {
             Console.Write("Please enter a valid positive number of seconds: ");
-            {
-                Console.Write("Please enter a valid positive number of seconds: ");
-                input = Console.ReadLine();
-            }
-            SetDuration(duration);
+            input = Console.ReadLine();
 
-            // Prep
-            Console.WriteLine("\nGet Ready...");
-            ShowSpinner(3); // Three seconds to prepare
-
-            // Each class would perform their logic
-            PerformActivity();
-
-            // Final Message
-            DisplayEndingMessage();
-            ShowSpinner(3); // Three seconds to finish up
         }
+        SetDuration(duration);
 
-        // Method that is going to be overridden by the sub-classes
+        // Prep
+        Console.WriteLine("\nGet Ready...");
+        ShowSpinner(3); // Three seconds to prepare
 
-        protected virtual void PerformActivity()
-        {
-        Console.WriteLine("Performin generic activity... (This should be overridden by subclasses)");
-        }
+        // Each class would perform their logic
+        PerformActivity();
+
+        // Final Message
+        DisplayEndingMessage();
+        ShowSpinner(3); // Three seconds to finish up
     }
 
-
-
-
+    // Method that is going to be overridden by the sub-classes
+    protected virtual void PerformActivity()
+    {
+        Console.WriteLine("Performin generic activity... (This should be overridden by subclasses)");
+    }
 }
+    
+    
+
